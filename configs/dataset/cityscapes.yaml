@@ -1,0 +1,20 @@
+type: SegDataset
+num_classes: 19
+img_shape: [1024, 2048]
+ann_root: /kube/home/zhangkai/datasets/3rdpatry/cityscapes
+ann_file:
+  train: train.json
+  val: val.json
+transforms:
+  train:
+    - type: SegRandomResizedCrop
+      size: ${dataset.img_shape}
+      scale: [0.5, 1.0]
+    - type: SegRandomFlip
+    - type: SegRandomRotate
+    - type: ColorJitter
+    - type: Normalize
+  val:
+    - type: SegResize
+      size: ${dataset.img_shape}
+    - type: Normalize

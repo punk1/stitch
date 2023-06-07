@@ -1,0 +1,14 @@
+type: LightHamHead
+num_classes: ${dataset.num_classes}
+in_channels: ${backbone.out_channels}
+in_index: [1, 2, 3]
+channels: 256
+ham_channels: 256
+ham_kwargs:
+  MD_R: 16
+dropout_ratio: 0.1
+norm_cfg:
+  type: GN
+  num_groups: 32
+  requires_grad: true
+align_corners: false

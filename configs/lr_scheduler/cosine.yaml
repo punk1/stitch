@@ -1,0 +1,3 @@
+type: CosineAnnealingLR
+T_max: ${epochs}
+warmup_epoch: 3

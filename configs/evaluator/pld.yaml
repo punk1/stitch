@@ -1,0 +1,6 @@
+type: PLDEvaluator
+data_cfg: ${dataset}
+iou_type: keypoints
+iou_thr: 0.9
+cls_type: pld
+debug: false

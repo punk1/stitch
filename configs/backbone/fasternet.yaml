@@ -1,0 +1,14 @@
+params:
+  type: FasterNet
+  mlp_ratio: 2
+  embed_dim: 128
+  depths: [1, 2, 13, 2]
+  feature_dim: 1280
+  patch_size: 4
+  patch_stride: 4
+  patch_size2: 2
+  patch_stride2: 2
+  drop_path_rate: 0.1
+  layer_scale_init_value: 0
+
+out_channels: [128, 256, 512, 1024]

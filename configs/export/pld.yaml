@@ -1,0 +1,7 @@
+name: ${task_name}.onnx
+inputs:
+  img: [1, 1000, 1000, 3]
+verbose: false
+opset_version: 11
+input_names: ['img']
+output_names: ['points', 'coarse_kpts']

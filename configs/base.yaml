@@ -1,0 +1,67 @@
+work_dir: logs
+task_name: megacv
+monitor: false
+resume: false
+pretrained: null
+
+lr: 0.01
+lr_total: null
+epochs: 80
+batch_size: 8
+
+wandb:
+  enabled: false
+  project: ${task_name}
+  track:
+    epochs: ${epochs}
+    batch_size: ${batch_size}
+    lr: ${lr}
+    lr_total: ${lr_total}
+
+ema:
+  enabled: false
+  decay: 0.9999
+  factor: 5000
+
+quantizer:
+  type: Quantizer
+  equalize: false
+  num_batches: 10
+  output: models
+  prefix: ${task_name}
+
+trainer:
+  type: Trainer
+  lr_per_gpu: ${lr}
+  lr_total: ${lr_total}
+  total_epochs: ${epochs}
+  max_keep: 100
+  summary_step: 20
+  accumulation_step: 1
+  save_epoch: 1
+  save_step: null
+  clip_gradient: 35
+  use_fp16: false
+  use_syncbn: false
+  use_profile: false
+  use_deterministic: false
+  use_benchmark: true
+  detect_anomaly: false
+  find_unused_parameters: false
+  seed: 12345
+
+inferer:
+  type: Inferer
+  interval: 3600
+  summary_step: 50
+  use_fp16: false
+  use_syncbn: false
+  use_deterministic: false
+  switch_to_deploy: false
+  seed: ${trainer.seed}
+
+dataloader:
+  type: DataLoader
+  batch_size: ${batch_size}
+  num_workers: 3
+  drop_last: true

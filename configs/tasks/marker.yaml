@@ -1,0 +1,13 @@
+defaults:
+  - freespace
+  - override dataset: marker
+  - _self_
+
+task_name: seg
+
+export:
+  output_names: ['seg']
+
+batch_size: 16
+epochs: 120
+lr_total: 0.03

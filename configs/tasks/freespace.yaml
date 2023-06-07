@@ -1,0 +1,11 @@
+defaults:
+  - pld
+  - override dataset: freespace
+  - override evaluator: seg
+  - override head: seg
+  - _self_
+
+task_name: seg
+
+export:
+  output_names: ['seg']

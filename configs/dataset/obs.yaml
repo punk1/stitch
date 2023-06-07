@@ -1,0 +1,17 @@
+defaults:
+  - pld
+  - _self_
+
+radius: 8
+offset_std: 40
+out_scale: 1
+ann_root: /kube/home/zhangkai/datasets/annos/coco_obs
+ann_file:
+  train:
+    # - obs_train_20230101.json
+    - sl03_train_202302.json
+    - sl03_train_202303.json
+    - sl03_train_202304.json
+  val: sl03_val_202303.json
+  # val: obs_val_20230101.json
+  # val: /kube/home/zhangkai/datasets/sl03_uploads/20221115-20230316.json

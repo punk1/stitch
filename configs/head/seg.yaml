@@ -1,0 +1,28 @@
+type: SegHead
+in_channels: [32, 32, 32, 32]
+out_channels: 32
+kernel_size: 3
+upsample_ratio: 1
+pred_convs: 1
+use_cbam: false
+use_dropblock: false
+drop_prob: 0.2
+act_cfg:
+  type: SiLU
+upsample_cfg:
+  mode: nearest
+pred_cfg:
+  seg:
+    channels: ${dataset.num_classes}
+loss_cfg:
+  seg:
+    type: mmdet.CrossEntropyLoss
+    avg_non_ignore: true
+    ignore_index: 255
+    use_sigmoid: false
+    loss_weight: 5
+kdloss_cfg:
+  seg:
+    type: mmdet.KnowledgeDistillationKLDivLoss
+    T: 10
+    loss_weight: 10

@@ -1,0 +1,54 @@
+type: PLDHead
+in_channels: [32, 32, 32, 32]
+out_channels: 32
+kernel_size: 3
+upsample_ratio: 2
+pred_convs: 1
+use_cbam: false
+use_dropblock: false
+drop_prob: 0.1
+act_cfg:
+  type: SiLU
+upsample_cfg:
+  mode: nearest
+pred_cfg:
+  hm:
+    channels: "${eval: ${dataset.num_classes} + ${dataset.num_points} if ${dataset.match} else ${dataset.num_classes}}"
+    act: sigmoid
+  offset:
+    channels: "${eval: ${dataset.num_points} * 4}"
+    act: relu
+  # seg:
+  #   channels: ${dataset.num_classes}
+loss_cfg:
+  hm:
+    type: GaussianFocalLoss
+    loss_weight: 1
+  offset:
+    type: CrossIOULoss
+    loss_weight: 5
+  # seg:
+  #   type: mmdet.CrossEntropyLoss
+  #   avg_non_ignore: true
+  #   ignore_index: 255
+  #   loss_weight: 5
+  iou:
+    type: mmdet.CIoULoss
+    loss_weight: 5
+kdloss_cfg:
+  hm:
+    type: mmdet.L1Loss
+    loss_weight: 200
+test_cfg:
+  with_kpts: true
+  with_topk: false
+  num_classes: ${dataset.num_classes}
+  num_points: ${dataset.num_points}
+  offset_std: ${dataset.offset_std}
+  match: ${dataset.match}
+  match_radius: 5
+  kernel: 3
+  topk: ${dataset.max_objects}
+  center_thr: 0.1
+  point_thr: 0.01
+  nms_thr: 0.5

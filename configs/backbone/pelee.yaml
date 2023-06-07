@@ -1,0 +1,4 @@
+params:
+  type: PeleeNet
+
+out_channels: [128, 256, 512, 704]

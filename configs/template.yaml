@@ -1,0 +1,37 @@
+apiVersion: k8s.ais.com/v1alpha1
+kind: TrainingJob
+metadata:
+  name: $JOB_NAME
+priority: 6
+alert_mail: 0
+nodes_type: 3
+spec:
+  image: $IMAGE
+  port: 7164
+  ports_num: 1
+  trainer:
+    command: ["/bin/bash", "-c", "cd $JOB_DIR && ./scripts/run.sh $ACTION $CONFIG $PARAMS"]
+    max-instance: 2
+    min-instance: $NUM_NODES
+    resources:
+      requests:
+        cpu: "$REQUEST_CPU"
+        memory: "${REQUEST_MEM}Gi"
+        nvidia.com/gpu: $NUM_GPUS
+      limits:
+        cpu: "$LIMIT_CPU"
+        memory: "${LIMIT_MEM}Gi"
+        nvidia.com/gpu: $NUM_GPUS
+  pserver:
+    command: ["/bin/bash", "-c", "cd $JOB_DIR && ./scripts/run.sh $ACTION $CONFIG $PARAMS"]
+    min-instance: 0
+    resources:
+      limits:
+        nvidia.com/gpu: 0
+  volumes:
+  - name: dshm
+    emptyDir:
+      medium: Memory
+  volumeMounts:
+  - name: dshm
+    mountPath: /dev/shm

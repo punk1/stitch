@@ -1,0 +1,18 @@
+defaults:
+  - weima-pld
+  - override dataset: obs
+  - override head: obs
+  - _self_
+
+dataset:
+  radius: 12
+  offset_std: 40
+  img_shape: [512, 512]
+
+evaluator:
+  cls_type: obs
+
+head:
+  use_dropblock: false
+
+task_name: obs

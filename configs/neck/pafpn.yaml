@@ -1,0 +1,16 @@
+type: PAFPN
+in_channels: ${backbone.out_channels}
+out_channels: 32
+start_level: 0
+num_outs: 4
+norm_cfg:
+  type: BN
+act_cfg:
+  type: SiLU
+upsample_cfg:
+  mode: nearest
+boost_cfg:
+  type: PPM
+  in_channels: ${backbone.out_channels[3]}
+  out_channels: ${backbone.out_channels[3]}
+  feat_size: "${eval: ${dataset.img_shape[1]} // 32}"

@@ -1,0 +1,7 @@
+params:
+  type: mmdet.Res2Net
+  depth: 50
+  scales: 4
+  base_width: 26
+
+out_channels: [256, 512, 1024, 2048]

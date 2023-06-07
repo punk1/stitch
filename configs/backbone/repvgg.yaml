@@ -1,0 +1,8 @@
+params:
+  type: RepVGG
+  num_blocks: [4, 6, 16, 1]
+  width_multiplier: [2, 2, 2, 4]
+  use_se: false
+  deploy: false
+
+out_channels: [128, 256, 512, 2048]

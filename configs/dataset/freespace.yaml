@@ -1,0 +1,26 @@
+type: SegDataset
+num_classes: 10
+img_shape: [448, 448]
+ann_root: /kube/home/zhangkai/datasets/annos/freespace
+ann_file:
+  train:
+    # - freespace_train_20230101.json
+    - sl03_train_202302.json
+    - sl03_train_202303.json
+    - sl03_train_202304.json
+  val: sl03_val_202303.json
+  # val: freespace_val_20230101.json
+transforms:
+  train:
+    - type: SegRandomResizedCrop
+      size: ${dataset.img_shape}
+      scale: [0.8, 1.0]
+      antialias: true
+    - type: SegRandomFlip
+    # - type: SegRandomRotate
+    - type: ColorJitter
+    - type: Normalize
+  val:
+    - type: SegResize
+      size: ${dataset.img_shape}
+    - type: Normalize

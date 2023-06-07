@@ -1,0 +1,9 @@
+params:
+  type: TimmModel
+  model_name: vovnet39a
+  residual: true
+  features_only: true
+  pretrained: false
+  out_indices: [1, 2, 3, 4]
+
+out_channels: [256, 512, 768, 1024]

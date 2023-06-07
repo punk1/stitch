@@ -1,0 +1,21 @@
+type: SegDataset
+num_classes: 4
+img_shape: [512, 512]
+ann_root: /kube/home/zhangkai/datasets/annos/marker
+ann_file:
+  train: marker_train_20230101.json
+  val: marker_val_20230101.json
+
+transforms:
+  train:
+    - type: SegRandomResizedCrop
+      size: ${dataset.img_shape}
+      scale: [0.5, 1.0]
+    - type: SegRandomFlip
+    # - type: SegRandomRotate
+    - type: ColorJitter
+    - type: Normalize
+  val:
+    - type: SegResize
+      size: ${dataset.img_shape}
+    - type: Normalize

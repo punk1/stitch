@@ -1,0 +1,24 @@
+defaults:
+  - base
+  - export: pld
+  - optimizer: adan
+  - lr_scheduler: cosine
+  - dataset: pld
+  - evaluator: pld
+  - normalizer: pld
+  - backbone: vovnet
+  - neck: pafpn
+  - head: pld
+  - _self_
+
+model:
+  type: BaseDetector
+  normalizer: ${normalizer}
+  backbone: ${backbone.params}
+  neck: ${neck}
+  head: ${head}
+
+task_name: pld
+epochs: 60
+batch_size: 64
+lr_total: 0.03

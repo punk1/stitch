@@ -1,0 +1,4 @@
+params:
+  type: LitePark
+
+out_channels: [96, 192, 384, 768]

@@ -1,0 +1,7 @@
+params:
+  type: TimmModel
+  model_name: cspdarknet53
+  out_indices: [2, 3, 4, 5]
+  checkpoint_path: /mnt/v1/home/zhangkai/pretrained/cspdarknet53_ra_256.pth
+
+out_channels: [128, 256, 512, 1024]

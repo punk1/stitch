@@ -1,0 +1,2 @@
+type: BaseNormalizer
+size: ${dataset.img_shape}

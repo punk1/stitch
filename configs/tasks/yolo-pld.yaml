@@ -1,0 +1,20 @@
+defaults:
+  - pld
+  - override head: yolo
+  - _self_
+
+export:
+  output_names:
+    - scores
+    - labels
+    - kpts
+
+dataset:
+  heatmap: false
+
+trainer:
+  find_unused_parameters: true
+
+epochs: 40
+batch_size: 64
+lr_total: 0.01

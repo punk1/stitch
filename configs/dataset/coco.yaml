@@ -1,0 +1,27 @@
+type: COCODataset
+num_classes: 80
+num_points: 2
+img_shape: [512, 512]
+out_scale: 1
+ann_root: /kube/home/zhangkai/datasets/3rdpatry/coco
+ann_file:
+  train: annotations/instances_train2017.json
+  val: annotations/instances_val2017.json
+img_root:
+  train: train2017
+  val: val2017
+transforms:
+  train:
+    - type: PLDRandomResizedCrop
+      size: ${dataset.img_shape}
+      scale: [0.5, 1.0]
+    - type: ColorJitter
+    - type: PLDRandomFlip
+      direction: ['horizontal']
+      resort: false
+    - type: RandomErasing
+    - type: Normalize
+  val:
+    - type: PLDResize
+      size: ${dataset.img_shape}
+    - type: Normalize

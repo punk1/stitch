@@ -1,0 +1,6 @@
+params:
+  type: ShuffleNetV2_Plus
+  model_size: Small
+
+# out_channels: [68, 168, 336, 672]
+out_channels: [36, 104, 208, 416]

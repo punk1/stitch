@@ -1,0 +1,7 @@
+params:
+  type: TimmModel
+  model_name: hrnet_w32
+  out_indices: [1, 2, 3, 4]
+  checkpoint_path: /mnt/v1/home/zhangkai/pretrained/hrnetv2_w32-90d8c5fb.pth
+
+out_channels: [128, 256, 512, 1024]

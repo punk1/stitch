@@ -1,0 +1,9 @@
+defaults:
+  - pld
+  - _self_
+
+upsample_ratio: 4
+use_dropblock: false
+loss_cfg:
+  offset:
+    loss_weight: 3

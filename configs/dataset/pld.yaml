@@ -1,0 +1,39 @@
+type: PLDDataset
+match: true
+heatmap: true
+num_classes: 3
+num_points: 4
+max_objects: 80
+cross_iou_alpha: 0.2
+radius: 8
+offset_std: 40
+img_shape: [448, 448]
+out_scale: 0.5
+ann_root: /kube/home/zhangkai/datasets/annos/coco_pld
+ann_file:
+  train:
+    # - pld_train_20230101.json
+    - sl03_train_202302_refine.json
+    - sl03_train_202303_refine.json
+    - sl03_train_202304_refine.json
+  val: /kube/home/zhangkai/checkpoint/test.json
+  # val: sl03_val_202303_refine.json
+  # val: pld_val_20230101.json
+  # val: /home/zhangkai/megacv/test.json
+  # val: /kube/home/zhangkai/datasets/sl03_uploads/20221115-20230316.json
+transforms:
+  train:
+    - type: PLDRandomResizedCrop
+      size: ${dataset.img_shape}
+      scale: [0.8, 1.0]
+      antialias: true
+    - type: ColorJitter
+    - type: PLDRandomFlip
+    # - type: PLDRandomRotate
+    #   angle: 90
+    # - type: RandomErasing
+    - type: Normalize
+  val:
+    - type: PLDResize
+      size: ${dataset.img_shape}
+    - type: Normalize

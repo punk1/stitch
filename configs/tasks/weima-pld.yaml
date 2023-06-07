@@ -1,0 +1,29 @@
+defaults:
+  - pld
+  - _self_
+
+dataset:
+  radius: 12
+  offset_std: 40
+  img_shape: [512, 512]
+
+export:
+  inputs:
+    img: [1, 3, 512, 512]
+    # img: [1, 1000, 1000, 3]
+
+backbone:
+  params:
+    model_name: ese_vovnet39b
+    pretrained: true
+
+neck:
+  out_channels: 64
+
+head:
+  in_channels: [64, 64, 64, 64]
+  out_channels: 96
+  use_dropblock: true
+  drop_prob: 0.1
+  test_cfg:
+    with_topk: false

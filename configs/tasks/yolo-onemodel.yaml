@@ -1,0 +1,40 @@
+defaults:
+  - base
+  - export: pld
+  - optimizer: sgd
+  - lr_scheduler: cosine
+  - backbone: vovnet
+  - _self_
+
+export:
+  inputs:
+    img: [1, 3, 384, 384]
+  output_names:
+    - pld_scores
+    - pld_labels
+    - pld_kpts
+    - obs_scores
+    - obs_labels
+    - obs_kpts
+    - seg
+
+ema:
+  enabled: false
+
+task_configs:
+  pld: yolo-pld.yaml
+  obs: yolo-obs.yaml
+  seg: freespace.yaml
+
+model:
+  type: MultiDetector
+  task_configs: ${task_configs}
+  backbone: ${backbone.params}
+
+trainer:
+  find_unused_parameters: true
+
+task_name: onemodel
+lr_total: 0.01
+batch_size: 64
+epochs: 60

@@ -1,0 +1,9 @@
+defaults:
+  - yolo-pld
+  - override dataset: obs
+  - _self_
+
+task_name: obs
+
+evaluator:
+  cls_type: obs

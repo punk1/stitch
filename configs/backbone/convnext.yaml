@@ -1,0 +1,8 @@
+params:
+  type: TimmModel
+  model_name: convnext_large_in22k
+  features_only: true
+  pretrained: true
+  out_indices: [0, 1, 2, 3]
+
+out_channels: [192, 384, 768, 1536]

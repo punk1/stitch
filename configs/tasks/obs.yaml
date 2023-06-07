@@ -1,0 +1,10 @@
+defaults:
+  - pld
+  - override dataset: obs
+  - override head: obs
+  - _self_
+
+evaluator:
+  cls_type: obs
+
+task_name: obs

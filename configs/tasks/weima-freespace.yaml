@@ -1,0 +1,17 @@
+defaults:
+  - weima-pld
+  - override dataset: freespace
+  - override evaluator: seg
+  - override head: seg
+  - _self_
+
+dataset:
+  img_shape: [512, 512]
+
+head:
+  use_dropblock: false
+
+export:
+  output_names: ['seg']
+
+task_name: seg

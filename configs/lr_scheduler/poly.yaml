@@ -1,0 +1,4 @@
+type: PolyLR
+T_max: ${epochs}
+power: 1.0
+warmup_epoch: 3

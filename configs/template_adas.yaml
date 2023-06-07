@@ -1,0 +1,40 @@
+apiVersion: kubeflow.org/v1
+kind: TFJob
+metadata:
+  name: $JOB_NAME
+  namespace: $USER
+spec:
+  runPolicy:
+    cleanPodPolicy: OnCompletion
+  tfReplicaSpecs:
+    Worker:
+      replicas: $NUM_NODES
+      restartPolicy: OnFailure
+      template:
+        spec:
+          containers:
+          - name: tensorflow
+            image: $IMAGE
+            workingDir: $JOB_DIR
+            command: ["/bin/bash", "-c", "./scripts/run.sh $ACTION $CONFIG $PARAMS"]
+            resources:
+              requests:
+                cpu: $REQUEST_CPU
+                memory: "${REQUEST_MEM}Gi"
+                nvidia.com/gpu: $NUM_GPUS
+              limits:
+                cpu: $LIMIT_CPU
+                memory: "${LIMIT_MEM}Gi"
+                nvidia.com/gpu: $NUM_GPUS
+            volumeMounts:
+              - mountPath: /kube
+                name: training
+              - mountPath: /dev/shm
+                name: dshm
+          volumes:
+            - name: training
+              hostPath:
+                path: /kube
+            - name: dshm
+              emptyDir:
+                medium: Memory

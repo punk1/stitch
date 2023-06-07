@@ -1,0 +1,53 @@
+defaults:
+  - base
+  - export: pld
+  - dataset: pld
+  - normalizer: pld
+  - optimizer: adan
+  - lr_scheduler: cosine
+  - backbone: vovnet
+  - _self_
+
+dataset:
+  img_shape: [512, 512]
+
+export:
+  inputs:
+    # img: [1, 3, 512, 512]
+    img: [1, 1000, 1000, 3]
+  output_names:
+    - pld_points
+    - pld_offset
+    - obs_points
+    - obs_offset
+    - seg
+
+backbone:
+  params:
+    model_name: ese_vovnet39b
+    pretrained: true
+
+task_configs:
+  pld: weima-pld.yaml
+  obs: weima-obs.yaml
+  seg: weima-freespace.yaml
+
+model:
+  type: MultiDetector
+  backbone: ${backbone.params}
+  tasks: ${task_configs}
+  normalizer: ${normalizer}
+
+ema:
+  enabled: false
+
+wandb:
+  enabled: false
+
+trainer:
+  find_unused_parameters: true
+
+task_name: onemodel
+lr_total: 0.03
+batch_size: 32
+epochs: 60
